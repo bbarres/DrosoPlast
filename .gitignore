@@ -1,10 +1,12 @@
+/data
+/output
+
 # History files
 .Rhistory
 .Rapp.history
 
 # Session Data files
 .RData
-/data
 
 # User-specific files
 .Ruserdata
