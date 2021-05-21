@@ -9,10 +9,7 @@ library(drc)
 library(medrc)
 library(plotrix)
 library(gdata)
-library(fmsb)
 library(tidyr)
-library(LDheatmap)
-library(grid)
 library(RColorBrewer)
 
 
@@ -20,14 +17,10 @@ library(RColorBrewer)
 #loading the bioassay dataset####
 ##############################################################################/
 
-#load the dataset
-dataDroz<-read.table("data/droso_data.txt",header=T,sep="\t",
-                     stringsAsFactors=TRUE)
+#load the global dataset
+dataDroPla<-read.table(file="data/dsuz23.txt",
+                       header=T,sep=";")
 
-#creation of variable to distinguish between male and female and time 
-#of exposure to pesticide
-dataDroz<-cbind(dataDroz,"repet"=paste(dataDroz$date,dataDroz$sex, 
-                                       dataDroz$exposition))
 
 
 #we compute the total number of individual tested and total number of 	
