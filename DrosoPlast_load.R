@@ -18,10 +18,15 @@ library(RColorBrewer)
 ##############################################################################/
 
 #load the global dataset
-dataDroPla<-read.table(file="data/dsuz23.txt",
+dataDroPla<-read.table(file="data/dsuz23.txt",stringsAsFactors=TRUE,
                        header=T,sep=";")
 
-
+#changing the ID of the drosophila lines
+levels(dataDroPla$ech_id)<-c("L8","L6","L1","L5","L2","L4",
+                             "R1","R2","R3","R4","R5","R6")
+#adding a column for the population
+dataDroPla$population<-dataDroPla$ech_id
+levels(dataDroPla$population)<-c(rep("Lyon",6),rep("Rennes",6))
 
 #we compute the total number of individual tested and total number of 	
 #dead individual for each date	
