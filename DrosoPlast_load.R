@@ -28,12 +28,6 @@ levels(dataDroPla$ech_id)<-c("L8","L6","L1","L5","L2","L4",
 dataDroPla$population<-dataDroPla$ech_id
 levels(dataDroPla$population)<-c(rep("Lyon",6),rep("Rennes",6))
 
-#we compute the total number of individual tested and total number of 	
-#dead individual for each date	
-checkdat<-aggregate(cbind(dead,total)~date+sex+repet,data=dataDroz,"sum")	
-checkdat<-checkdat[order(checkdat$repet),]	
-plot(checkdat)
-
 
 ##############################################################################/
 #Writing info session for reproducibility####
