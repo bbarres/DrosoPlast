@@ -18,12 +18,27 @@ mod1<-metadrm(nb_mtot/(nb_mtot+nb_vi)~dose,
               data=dataDroPla,
               ind=ech_id,
               cid2=population,
-              fct=LN.3u())
+              fct=LN.3u(),
+              type="binomial",
+              weights=(nb_mtot+nb_vi),
+              struct = "UN")
 summary(mod1)
-#comparison of the CL50
+
+#comparison of the CL50 grouped by population
 EDcomp(mod1,c(50,50))
+#no significant differences
 
+mod2<-drm(nb_mtot/(nb_mtot+nb_vi)~dose,
+          data=dataDroPla,
+          curveid=ech_id,
+          fct=LN.3u(),
+          type="binomial",
+          weights=(nb_mtot+nb_vi))
+summary(mod2)
 
+#comparisons of the CL50
+compParm(mod2,"e","-")
+EDcomp(mod2,c(50,50))
 
 # This doesn't work
 # dataDroPla$CALC<-dataDroPla$nb_mtot/(dataDroPla$nb_mtot+dataDroPla$nb_vi)
