@@ -26,8 +26,10 @@ summary(mod1)
 
 #comparison of the CL50 grouped by population
 EDcomp(mod1,c(50,50))
-#no significant differences
+#no significant differences between populations
 
+
+#model for each drosophila lines
 mod2<-drm(nb_mtot/(nb_mtot+nb_vi)~dose,
           data=dataDroPla,
           curveid=ech_id,
