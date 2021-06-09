@@ -13,20 +13,39 @@ source("DrosoPlast_load.R")
 #Model comparing populations####
 ##############################################################################/
 
-#model using the nonlinear mixed model
-mod1<-metadrm(nb_mtot/(nb_mtot+nb_vi)~dose,
-              data=dataDroPla,
+datDroPlaS<-dataDroPla[dataDroPla$pest_sa_id=="SPINOSAD",]
+datDroPlaP<-dataDroPla[dataDroPla$pest_sa_id!="SPINOSAD",]
+
+#model using the nonlinear mixed model for spinosad
+modS<-metadrm(nb_mtot/(nb_mtot+nb_vi)~dose,
+              data=datDroPlaS,
               ind=ech_id,
               cid2=population,
-              fct=LN.3u(),
+              fct=LL.3u(),
               type="binomial",
               weights=(nb_mtot+nb_vi),
               struct = "UN")
-summary(mod1)
+summary(modS)
 
 #comparison of the CL50 grouped by population
-EDcomp(mod1,c(50,50))
+EDcomp(modS,c(50,50))
 #no significant differences between populations
+
+#model using the nonlinear mixed model for phosmet
+modP<-metadrm(nb_mtot/(nb_mtot+nb_vi)~dose,
+              data=datDroPlaP,
+              ind=ech_id,
+              cid2=population,
+              fct=LL.3u(),
+              type="binomial",
+              weights=(nb_mtot+nb_vi),
+              struct = "UN")
+summary(modP)
+
+#comparison of the CL50 grouped by population
+EDcomp(modP,c(50,50))
+#no significant differences between populations
+
 
 
 #model for each drosophila lines
